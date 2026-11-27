@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Naturruter på Fyn og øerne</title>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.css">
+<script src="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js"></script>
+<style>
+  html, body { margin: 0; height: 100%; font-family: system-ui, sans-serif; }
+  #kort { position: fixed; inset: 0; height: 100dvh; }
+  #titel { position: fixed; top: 0; left: 0; right: 0; z-index: 2; margin: 0; padding: 8px 12px;
+           font-size: 1.1rem; background: rgba(255,255,255,.92); box-shadow: 0 1px 4px rgba(0,0,0,.2); }
+  #besked { position: fixed; top: 48px; left: 12px; right: 12px; z-index: 2; display: none;
+            padding: 8px 12px; background: #fff3cd; border-radius: 6px; }
+  .maplibregl-popup-content { max-width: min(300px, 85vw); max-height: 50dvh; overflow: auto; }
+  #titel { color: #153c31; }
+  #kort-hjaelp { position: fixed; left: 10px; bottom: 40px; z-index: 1; margin: 0;
+                 padding: 8px 10px; background: #fffffff2; color: #153c31;
+                 border-radius: 6px; font-size: .82rem; pointer-events: none; max-width: 67vw; }
+  #indlaeser { position: fixed; top: 48px; left: 12px; z-index: 1; padding: 8px 12px; background: white; }
+  #besked[style*="block"] ~ #indlaeser { visibility: hidden; }
+  .maplibregl-ctrl-group button, .kort-popup button, .kort-popup a { min-height: 44px; }
+  .maplibregl-ctrl-group button { min-width: 44px; }
+  .maplibregl-popup-close-button { width: 44px; height: 44px; font-size: 1.25rem; }
+  .maplibregl-popup-content { box-sizing: border-box; padding: 12px; }
+  .kort-popup { color: #17362d; font: .9rem/1.4 system-ui, sans-serif; }
+  .kort-popup h2 { margin: 0 34px 8px 0; font-size: 1rem; }
+  .kort-popup p { margin: 0 0 8px; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .kort-popup button, .kort-popup a { display: flex; align-items: center; }
+  .kort-popup a { color: #145b48; }
+  .kort-popup button { border: 0; border-radius: 6px; padding: 0 12px; background: #155744;
+                      color: white; font: inherit; cursor: pointer; }
+  .kort-popup input, .kort-popup textarea { display: block; box-sizing: border-box; width: 100%;
+                    min-height: 44px; margin: 2px 0 8px; padding: 6px; font: 1rem system-ui, sans-serif; }
+  .punkthandlinger { display: flex; flex-wrap: wrap; gap: 8px; }
+  .kort-popup .slet { background: #88391e; }
+  #rutesoegning { position: fixed; top: 48px; left: 12px; z-index: 2; box-sizing: border-box;
+                   width: min(340px, calc(100vw - 24px)); padding: 8px; border-radius: 8px;
+                   background: white; box-shadow: 0 1px 4px #0003; color: #153c31; }
+  #besked[style*="block"] ~ #rutesoegning { top: 110px; }
+  #rutesoegning label { display: block; margin-bottom: 4px; font-size: .85rem; }
+  #rutesoegning input, #rutesoegning select { box-sizing: border-box; width: 100%; min-height: 44px; padding: 6px 10px;
+                       border: 1px solid #67847a; border-radius: 5px; font: inherit; }
+  #rutesoegning label[for="laengde"] { margin-top: 8px; }
+  #rutesoegning .interessevalg { display: flex; align-items: center; gap: 8px; min-height: 44px; margin: 0; }
+  #rutesoegning .interessevalg input { width: 20px; min-height: auto; accent-color: #644499; }
+  .interessevalg span { color: #644499; }
+  #interessestatus { display: block; font-size: .8rem; }
+  #soegestatus { display: block; font-size: .85rem; }
+  #soegestatus:not(:empty) { margin-top: 6px; }
+  #soegeresultater { list-style: none; margin: 0; padding: 0; max-height: min(34dvh, 275px); overflow: auto; }
+  #soegeresultater button { width: 100%; min-height: 44px; text-align: left; background: white;
+                           border: 0; border-top: 1px solid #d6e0dc; font: inherit; color: inherit;
+                           padding: 6px; cursor: pointer; }
+  #soegeresultater button:focus-visible { outline: 2px solid #087456; outline-offset: -2px; }
+  .rutepunkt { width: 44px; height: 44px; border: 0; background: transparent;
+               display: grid; place-items: center; cursor: pointer; }
+  .rutepunkt::before { content: ''; width: 15px; height: 15px; border: 2px solid white;
+                      background: #a44514; border-radius: 50%; box-shadow: 0 0 0 1px #843b15; }
+</style>
+</head>
+<body>
+<h1 id="titel">Naturruter på Fyn og øerne</h1>
+<div id="besked" role="status"></div>
+<div id="kort"></div>
+<p id="kort-hjaelp">Tryk på en grøn rute for at se detaljer og tilføje et punkt.</p>
+<div id="indlaeser" role="status">Indlæser data …</div>
+<section id="rutesoegning" aria-label="Find en vandrerute" hidden>
+  <label for="soeg">Søg efter rute eller kommune</label>
+  <input id="soeg" type="search" placeholder="Fx Kløversti i Middelfart" autocomplete="off">
+  <label for="laengde">Rutelængde</label>
+  <select id="laengde">
+    <option value="">Alle længder</option>
+    <option value="kort">Under 5 km</option>
+    <option value="mellem">5 til 10 km</option>
+    <option value="lang">Over 10 km</option>
+  </select>
+  <label class="interessevalg"><input id="interessepunkter" type="checkbox">
+    <span aria-hidden="true">●</span> Vis interessepunkter
+  </label>
+  <div id="interessetypefelt" hidden>
+    <label for="interessetype">Type af interessepunkt</label>
+    <select id="interessetype">
+      <option value="">Alle typer</option>
+      <option value="3012">Shelters</option>
+      <option value="2022">Udsigtspunkter</option>
+      <option value="2012">Fugle- og udsigtstårne</option>
+      <option value="1201">Picnicpladser</option>
+      <option value="1132">Madpakkehuse og tørvejrsrum</option>
+    </select>
+    <label class="interessevalg" title="Vælg først en rute i søgelisten">
+      <input id="interessenaer" type="checkbox" disabled> Inden for 500 m af valgt rute
+    </label>
+    <span id="interessestatus" role="status"></span>
+  </div>
+  <output id="soegestatus" for="soeg" role="status"></output>
+  <ul id="soegeresultater"></ul>
+</section>
+<script>
+const kort = new maplibregl.Map({
+  container: 'kort',
+  style: 'https://tiles.openfreemap.org/styles/positron',
+  bounds: [[9.67, 54.68], [10.99, 55.68]], // erstat med områdets [[vest, syd], [øst, nord]]
+  attributionControl: false
+});
+kort.addControl(new maplibregl.AttributionControl({
+  compact: false, // kreditering skal altid være synlig
+  customAttribution: ['GeoDanmark, GeoFA']
+}));
+kort.addControl(new maplibregl.NavigationControl(), 'bottom-right');
+
+function visBesked(tekst) {
+  const el = document.getElementById('besked');
+  el.textContent = tekst;
+  el.style.display = 'block';
+}
+
+// Kildernes navne til fejlbeskeder
+const kildenavne = {};
+function tilføjKilde(id, navn, kilde) {
+  kildenavne[id] = navn;
+  kort.addSource(id, kilde);
+}
+
+kort.on('error', hændelse => {
+  console.error(hændelse.error);
+  const navn = kildenavne[hændelse.sourceId];
+  visBesked(navn ? 'Kunne ikke hente data fra ' + navn + '. Prøv at genindlæse siden.'
+                 : 'Der skete en fejl på kortet. Prøv at genindlæse siden.');
+});
+
+kort.on('load', () => {
+  const adresse = 'https://geofa.geodanmark.dk/api/v2/sql/fkg?q=SELECT%20beliggenhedskommune%2Coff_kode%2Cobjekt_id%2Cnavn%2Claengde%2Clink%2Clink1%2CST_Transform%28ST_Force2D%28geometri%29%2C4326%29%20AS%20geometri%20FROM%20fkg.t_5802_fac_li%20WHERE%20rute_ty_k%3D5%20AND%20statuskode%3D3%20AND%20off_kode%3D1%20AND%20beliggenhedskommune%20IN%20%28410%2C420%2C430%2C440%2C450%2C461%2C479%2C480%2C482%2C492%29%20AND%20ST_Intersects%28geometri%2CST_Transform%28ST_MakeEnvelope%289.67%2C54.68%2C10.99%2C55.68%2C4326%29%2CST_SRID%28geometri%29%29%29&srs=4326';
+  const gemmenøgle = 'naturruter-fyn-punkter-v1';
+  const indlæser = document.getElementById('indlaeser');
+  let punkter = [];
+  let åbenPopup;
+  try {
+    punkter = JSON.parse(localStorage.getItem(gemmenøgle) || '[]');
+  } catch {
+    visBesked('Dine gemte rutepunkter kunne ikke læses.');
+  }
+
+  for (const [klasse, navn] of [
+    ['zoom-in', 'Zoom ind'], ['zoom-out', 'Zoom ud'], ['compass', 'Vend kortet mod nord'],
+    ['ctrl-attrib-button', 'Vis kortets kilder']
+  ]) {
+    const knap = document.querySelector('.maplibregl-ctrl-' + klasse) ||
+                 document.querySelector('.maplibregl-' + klasse);
+    if (knap) {
+      knap.title = navn;
+      knap.setAttribute('aria-label', navn);
+    }
+  }
+  kort.getCanvas().setAttribute('aria-label', 'Kort over naturruter på Fyn og øerne');
+
+  function element(type, tekst) {
+    const felt = document.createElement(type);
+    felt.textContent = tekst;
+    return felt;
+  }
+
+  function visPopup(sted, indhold) {
+    åbenPopup?.remove();
+    åbenPopup = new maplibregl.Popup({ maxWidth: 'min(300px, 85vw)' })
+      .setLngLat(sted).setDOMContent(indhold).addTo(kort);
+    const luk = åbenPopup.getElement().querySelector('.maplibregl-popup-close-button');
+    luk.setAttribute('aria-label', 'Luk');
+    luk.title = 'Luk';
+  }
+
+  function gemPunkter(opdateret, status) {
+    try {
+      localStorage.setItem(gemmenøgle, JSON.stringify(opdateret));
+      punkter = opdateret;
+      return true;
+    } catch {
+      status.textContent = 'Browseren kunne ikke gemme ændringen.';
+      return false;
+    }
+  }
+
+  function tegnPunkt(punkt) {
+    const markør = element('button', '');
+    markør.type = 'button';
+    markør.className = 'rutepunkt';
+    markør.setAttribute('aria-label', 'Rutepunkt: ' + punkt.navn);
+    markør.addEventListener('click', hændelse => {
+      hændelse.stopPropagation();
+      const visning = document.createElement('div');
+      visning.className = 'kort-popup';
+      visning.append(element('h2', punkt.navn), element('p', punkt.rute));
+      if (punkt.note) visning.append(element('p', punkt.note));
+      const handlinger = document.createElement('div');
+      handlinger.className = 'punkthandlinger';
+      const rediger = element('button', 'Redigér');
+      rediger.addEventListener('click', () => tilføjPunkt(punkt.sted, punkt.rute, punkt, markørPåKort));
+      const slet = element('button', 'Slet punkt');
+      slet.className = 'slet';
+      const status = element('p', '');
+      status.setAttribute('role', 'status');
+      slet.addEventListener('click', () => {
+        if (!window.confirm('Vil du slette rutepunktet ”' + punkt.navn + '”?')) return;
+        if (gemPunkter(punkter.filter(gemt => gemt !== punkt), status)) {
+          markørPåKort.remove();
+          åbenPopup.remove();
+        }
+      });
+      handlinger.append(rediger, slet);
+      visning.append(handlinger, status);
+      visPopup(punkt.sted, visning);
+    });
+    const markørPåKort = new maplibregl.Marker({ element: markør }).setLngLat(punkt.sted).addTo(kort);
+  }
+
+  function tilføjPunkt(sted, rute, eksisterende, markørPåKort) {
+    const formular = document.createElement('form');
+    formular.className = 'kort-popup';
+    const navn = document.createElement('input');
+    navn.required = true;
+    navn.maxLength = 80;
+    navn.value = eksisterende?.navn || '';
+    const note = document.createElement('textarea');
+    note.maxLength = 500;
+    note.value = eksisterende?.note || '';
+    const navnEtiket = element('label', 'Punktets navn');
+    navnEtiket.append(navn);
+    const noteEtiket = element('label', 'Note');
+    noteEtiket.append(note);
+    const gem = element('button', eksisterende ? 'Gem ændringer' : 'Gem punkt');
+    const status = element('p', '');
+    status.setAttribute('role', 'status');
+    formular.append(element('h2', eksisterende ? 'Redigér rutepunkt' : 'Tilføj rutepunkt'), element('p', rute),
+                    navnEtiket, noteEtiket, gem, status);
+    formular.addEventListener('submit', hændelse => {
+      hændelse.preventDefault();
+      if (!navn.value.trim()) {
+        status.textContent = 'Skriv et navn til punktet.';
+        return;
+      }
+      const punkt = { sted, rute, navn: navn.value.trim(), note: note.value.trim() };
+      const opdateret = eksisterende
+        ? punkter.map(gemt => gemt === eksisterende ? punkt : gemt)
+        : [...punkter, punkt];
+      if (!gemPunkter(opdateret, status)) return;
+      markørPåKort?.remove();
+      tegnPunkt(punkt);
+      åbenPopup.remove();
+    });
+    visPopup(sted, formular);
+    navn.focus();
+  }
+
+  function punktPåRute(hændelse, rute) {
+    let afstand = Infinity;
+    let nærmest = hændelse.lngLat;
+    const linjer = rute.geometry.type === 'LineString'
+      ? [rute.geometry.coordinates] : rute.geometry.coordinates;
+    for (const linje of linjer) {
+      for (let i = 1; i < linje.length; i++) {
+        const start = kort.project(linje[i - 1].slice(0, 2));
+        const slut = kort.project(linje[i].slice(0, 2));
+        const dx = slut.x - start.x;
+        const dy = slut.y - start.y;
+        const længde = dx * dx + dy * dy;
+        if (!længde) continue;
+        const andel = Math.max(0, Math.min(1,
+          ((hændelse.point.x - start.x) * dx + (hændelse.point.y - start.y) * dy) / længde));
+        const træf = [start.x + andel * dx, start.y + andel * dy];
+        const forskel = Math.hypot(hændelse.point.x - træf[0], hændelse.point.y - træf[1]);
+        if (forskel < afstand) {
+          afstand = forskel;
+          nærmest = kort.unproject(træf);
+        }
+      }
+    }
+    return nærmest.toArray();
+  }
+
+  const længdefelt = document.getElementById('laengde');
+  const søgefelt = document.getElementById('soeg');
+  const resultater = document.getElementById('soegeresultater');
+  const søgestatus = document.getElementById('soegestatus');
+
+  function søgetekst(tekst) {
+    return tekst.toLocaleLowerCase('da-DK').replace(/[^a-zæøå0-9]/g, '');
+  }
+
+  let valgtRuteId = '';
+
+  function zoomTilRute(rute) {
+    const grænser = new maplibregl.LngLatBounds();
+    const linjer = rute.geometry.type === 'LineString'
+      ? [rute.geometry.coordinates] : rute.geometry.coordinates;
+    for (const linje of linjer) {
+      for (const [længde, bredde] of linje) grænser.extend([længde, bredde]);
+    }
+    if (grænser.isEmpty()) return;
+    åbenPopup?.remove();
+    valgtRuteId = rute.properties.objekt_id;
+    kort.setFilter('valgt-rute', ['==', ['get', 'objekt_id'], valgtRuteId]);
+    opdatérInteresseområde();
+    kort.fitBounds(grænser, {
+      padding: { top: Math.min(kort.getContainer().clientHeight / 2, document.getElementById('rutesoegning').getBoundingClientRect().bottom + 12), right: 36, bottom: 90, left: 36 },
+      maxZoom: 16
+    });
+  }
+
+  function aktivérSøgning(data) {
+    const kommuner = {
+      410: 'Middelfart', 420: 'Assens', 430: 'Faaborg-Midtfyn',
+      440: 'Kerteminde', 450: 'Nyborg', 461: 'Odense',
+      479: 'Svendborg', 480: 'Nordfyns', 482: 'Langeland', 492: 'Ærø'
+    };
+    const kommuneFor = rute => kommuner[rute.properties.beliggenhedskommune] || '';
+    const ruter = data.features.filter(rute => rute.geometry && rute.properties?.navn?.trim());
+    ruter.sort((a, b) => a.properties.navn.localeCompare(b.properties.navn, 'da-DK'));
+    document.getElementById('rutesoegning').hidden = false;
+    function passerLængde(rute, valg) {
+      if (!valg) return true;
+      const km = Number(rute.properties.laengde);
+      if (!(km > 0)) return false;
+      if (valg === 'kort') return km < 5;
+      if (valg === 'mellem') return km >= 5 && km <= 10;
+      return km > 10;
+    }
+
+    function opdatérResultater() {
+      resultater.replaceChildren();
+      søgestatus.textContent = '';
+      if (valgtRuteId) {
+        valgtRuteId = '';
+        opdatérInteresseområde();
+      }
+      kort.setFilter('valgt-rute', ['==', ['get', 'objekt_id'], '']);
+      const søgning = søgefelt.value.trim().split(/\s+/).map(søgetekst).filter(ord => ord && ord !== 'i');
+      const længdevalg = længdefelt.value;
+      if (!søgning.length && !længdevalg) return;
+      const fund = ruter.filter(rute => {
+        const navn = søgetekst(rute.properties.navn);
+        const kommune = søgetekst(kommuneFor(rute));
+        return passerLængde(rute, længdevalg) &&
+          søgning.every(ord => navn.includes(ord) || kommune.includes(ord));
+      });
+      søgestatus.textContent = fund.length ? fund.length + ' fundet' : 'Ingen ruter fundet';
+      for (const rute of fund) {
+        const række = document.createElement('li');
+        const længde = Number(rute.properties.laengde);
+        const tekst = længde > 0
+          ? rute.properties.navn + ' · ' + længde.toLocaleString('da-DK') + ' km'
+          : rute.properties.navn;
+        const kommune = kommuneFor(rute);
+        const knap = element('button', kommune ? tekst + ' · ' + kommune : tekst);
+        knap.type = 'button';
+        knap.addEventListener('click', () => {
+          if (!længdefelt.value) søgefelt.value = rute.properties.navn;
+          resultater.replaceChildren();
+          søgestatus.textContent = 'Valgt: ' + rute.properties.navn;
+          søgefelt.focus({ preventScroll: true });
+          søgefelt.blur();
+          zoomTilRute(rute);
+        });
+        række.append(knap);
+        resultater.append(række);
+      }
+    }
+
+    søgefelt.addEventListener('input', opdatérResultater);
+    længdefelt.addEventListener('change', () => {
+      const valg = længdefelt.value;
+      const filter = valg
+        ? ['in', ['get', 'objekt_id'], ['literal', data.features
+          .filter(rute => passerLængde(rute, valg)).map(rute => rute.properties.objekt_id)]]
+        : null;
+      kort.setFilter('ruter', filter);
+      kort.setFilter('ruter-tryk', filter);
+      åbenPopup?.remove();
+      opdatérResultater();
+    });
+    søgefelt.addEventListener('keydown', hændelse => {
+      if (hændelse.key === 'Enter') resultater.querySelector('button')?.click();
+      if (hændelse.key === 'Escape') resultater.replaceChildren();
+    });
+  }
+
+  kort.on('sourcedata', hændelse => {
+    if (hændelse.sourceId === 'ruter' && hændelse.isSourceLoaded) indlæser.hidden = true;
+  });
+  tilføjKilde('ruter', 'GeoFA', { type: 'geojson', data: adresse });
+  kort.addLayer({
+    id: 'ruter', type: 'line', source: 'ruter',
+    layout: { 'line-cap': 'round', 'line-join': 'round' },
+    paint: { 'line-color': '#087456', 'line-width': 3 }
+  });
+  kort.addLayer({
+    id: 'ruter-tryk', type: 'line', source: 'ruter',
+    paint: { 'line-width': 44, 'line-opacity': 0 }
+  });
+  kort.addLayer({
+    id: 'valgt-rute', type: 'line', source: 'ruter',
+    filter: ['==', ['get', 'objekt_id'], ''],
+    layout: { 'line-cap': 'round', 'line-join': 'round' },
+    paint: { 'line-width': 5, 'line-color': '#175d9d' }
+  });
+  kort.getSource('ruter').getData().then(aktivérSøgning).catch(() => {
+    visBesked('Rutesøgningen kunne ikke indlæses. Prøv at genindlæse siden.');
+  });
+  const interessevalg = document.getElementById('interessepunkter');
+  const interessetype = document.getElementById('interessetype');
+  const interessetypefelt = document.getElementById('interessetypefelt');
+
+  const nærRuten = document.getElementById('interessenaer');
+  const interessestatus = document.getElementById('interessestatus');
+  const interesseAdresse = 'https://geofa.geodanmark.dk/api/v2/sql/fkg?q=SELECT%20off_kode%2Cfacil_ty_k%2Cfacil_ty%2Cnavn%2Cbeskrivels%2Clink%2Clink1%2CST_Transform%28ST_Force2D%28geometri%29%2C4326%29%20AS%20geometri%20FROM%20fkg.t_5800_fac_pkt%20WHERE%20statuskode%3D3%20AND%20off_kode%3D1%20AND%20facil_ty_k%20IN%20%282012%2C2022%2C3012%2C1201%2C1132%29%20AND%20beliggenhedskommune%20IN%20%28410%2C420%2C430%2C440%2C450%2C461%2C479%2C480%2C482%2C492%29%20AND%20ST_Intersects%28geometri%2CST_Transform%28ST_MakeEnvelope%289.67%2C54.68%2C10.99%2C55.68%2C4326%29%2CST_SRID%28geometri%29%29%29&srs=4326';
+  const nærRuteForespørgsel = `SELECT off_kode,facil_ty_k,facil_ty,navn,beskrivels,link,link1,ST_Transform(ST_Force2D(p.geom),4326) AS geometri FROM fkg.t_5800_fac_pkt CROSS JOIN LATERAL ST_Dump(geometri) AS p WHERE statuskode=3 AND off_kode=1 AND facil_ty_k IN (2012,2022,3012,1201,1132) AND beliggenhedskommune IN (410,420,430,440,450,461,479,480,482,492) AND ST_Intersects(geometri,ST_Transform(ST_MakeEnvelope(9.67,54.68,10.99,55.68,4326),ST_SRID(geometri))) AND ST_DWithin(ST_Transform(p.geom,4326)::geography,(SELECT ST_Transform(geometri,4326)::geography FROM fkg.t_5802_fac_li WHERE objekt_id='RUTE_ID' AND off_kode=1 AND statuskode=3 LIMIT 1),500)`;
+  let ønsketAdresse = interesseAdresse;
+
+  function opdatérInteresseområde() {
+    const ruteKanFiltreres = /^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/i.test(valgtRuteId);
+    nærRuten.disabled = !ruteKanFiltreres;
+    if (!ruteKanFiltreres) nærRuten.checked = false;
+    const adresse = new URL(interesseAdresse);
+    if (nærRuten.checked) {
+      adresse.search = 'q=' + encodeURIComponent(nærRuteForespørgsel.replace('RUTE_ID', valgtRuteId)) + '&srs=4326';
+    }
+    const nyAdresse = nærRuten.checked ? adresse.href : interesseAdresse;
+    const kilde = kort.getSource('interesse');
+    if (!kilde || nyAdresse === ønsketAdresse) return;
+    ønsketAdresse = nyAdresse;
+    interessestatus.textContent = 'Indlæser interessepunkter …';
+    åbenPopup?.remove();
+    kilde.setData(nyAdresse);
+    kilde.getData().then(data => {
+      if (ønsketAdresse !== nyAdresse) return;
+      interessestatus.textContent = nærRuten.checked && data.features.length === 0
+        ? 'Ingen interessepunkter inden for 500 m.' : '';
+    }).catch(() => {
+      if (ønsketAdresse === nyAdresse) interessestatus.textContent = '';
+    });
+  }
+
+  nærRuten.addEventListener('change', opdatérInteresseområde);
+  interessevalg.addEventListener('change', () => {
+    interessetypefelt.hidden = !interessevalg.checked;
+    if (!kort.getSource('interesse')) {
+      tilføjKilde('interesse', 'GeoFA interessepunkter', { type: 'geojson', data: interesseAdresse });
+      kort.addLayer({
+        id: 'interesse', type: 'circle', source: 'interesse',
+        paint: { 'circle-radius': 6, 'circle-color': '#644499',
+                 'circle-stroke-width': 2, 'circle-stroke-color': '#fff' }
+      });
+    }
+    opdatérInteresseområde();
+    kort.setLayoutProperty('interesse', 'visibility', interessevalg.checked ? 'visible' : 'none');
+    åbenPopup?.remove();
+  });
+
+  interessetype.addEventListener('change', () => {
+    if (!kort.getLayer('interesse')) return;
+    const filter = interessetype.value
+      ? ['==', ['get', 'facil_ty_k'], Number(interessetype.value)]
+      : null;
+    kort.setFilter('interesse', filter);
+    åbenPopup?.remove();
+  });
+
+  function tilføjInformationslink(boks, adresser, label) {
+    for (const tekst of adresser) {
+      if (!tekst?.trim()) continue;
+      try {
+        const url = new URL(tekst.trim());
+        if (url.protocol !== 'https:' && url.protocol !== 'http:') continue;
+        const link = element('a', label);
+        link.href = url.href;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        boks.append(link);
+        break;
+      } catch {
+        continue;
+      }
+    }
+  }
+
+  function visInteressepunkt(punkt, sted) {
+    const data = punkt.properties;
+    const type = data.facil_ty;
+    const navn = data.navn?.trim() || type || 'Interessepunkt';
+    const boks = document.createElement('div');
+    boks.className = 'kort-popup';
+    boks.append(element('h2', navn));
+    if (type && type !== navn) boks.append(element('p', type));
+    if (data.beskrivels?.trim()) boks.append(element('p', data.beskrivels.trim()));
+    tilføjInformationslink(boks, [data.link, data.link1], 'Mere om stedet');
+    visPopup(sted, boks);
+  }
+
+  kort.on('click', hændelse => {
+    if (interessevalg.checked && kort.getLayer('interesse')) {
+      const [punkt] = kort.queryRenderedFeatures(hændelse.point, { layers: ['interesse'] });
+      if (punkt) {
+        visInteressepunkt(punkt, hændelse.lngLat);
+        return;
+      }
+    }
+    const kandidater = kort.queryRenderedFeatures(hændelse.point, { layers: ['ruter-tryk'] });
+    let bedste;
+    for (const rute of kandidater) {
+      const sted = punktPåRute(hændelse, rute);
+      const pixel = kort.project(sted);
+      const afstand = Math.hypot(pixel.x - hændelse.point.x, pixel.y - hændelse.point.y);
+      if (!bedste || afstand < bedste.afstand) bedste = { rute, sted, afstand };
+    }
+    if (!bedste) return;
+    const data = bedste.rute.properties;
+    const navn = data.navn?.trim() || 'Vandrerute uden navn';
+    const boks = document.createElement('div');
+    boks.className = 'kort-popup';
+    boks.append(element('h2', navn));
+    const længde = Number(data.laengde);
+    if (længde > 0) {
+      boks.append(element('p', længde.toLocaleString('da-DK', { maximumFractionDigits: 2 }) + ' km'));
+    }
+    tilføjInformationslink(boks, [data.link, data.link1], 'Mere om ruten');
+    const knap = element('button', 'Tilføj rutepunkt her');
+    knap.addEventListener('click', () => tilføjPunkt(bedste.sted, navn));
+    boks.append(knap);
+    visPopup(bedste.sted, boks);
+  });
+
+  punkter.forEach(tegnPunkt);
+});
+</script>
+</body>
+</html>
