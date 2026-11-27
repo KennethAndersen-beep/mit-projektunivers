@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Autocamperpladser i Danmark</title>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.css">
+<script src="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js"></script>
+<style>
+  html, body { margin: 0; height: 100%; font-family: system-ui, sans-serif; }
+  #kort { position: fixed; inset: 0; height: 100dvh; }
+  #titel { position: fixed; top: 0; left: 0; right: 0; z-index: 2; margin: 0; padding: 8px 12px;
+           font-size: 1.1rem; background: rgba(255,255,255,.92); box-shadow: 0 1px 4px rgba(0,0,0,.2); }
+  #besked { position: fixed; top: 48px; left: 12px; right: 12px; z-index: 2; display: none;
+            padding: 8px 12px; background: #fff3cd; border-radius: 6px; }
+  .maplibregl-popup-content { max-width: min(300px, 85vw); max-height: 50dvh; overflow: auto; }
+
+  #titel { color: #173c36; }
+  #indlaeser { position: fixed; top: 48px; left: 12px; z-index: 1; padding: 8px 12px; background: white; }
+  #besked[style*="block"] ~ #indlaeser { visibility: hidden; }
+  #filtre { position: fixed; top: 48px; left: 10px; z-index: 2; max-width: calc(100vw - 20px);
+            box-sizing: border-box; padding: 0 9px; border-radius: 6px; background: #fffffff5; color: #173c36; }
+  #besked[style*="block"] ~ #filtre { top: 120px; }
+  #filtre { width: min(350px, calc(100vw - 20px)); }
+  #filtre label[for="soeg"] { display: block; padding-top: 6px; font-size: .85rem; }
+  #soeg { box-sizing: border-box; width: 100%; min-height: 44px; margin-top: 4px;
+          padding: 6px 9px; border: 1px solid #68867b; border-radius: 5px; font: inherit; }
+  #resultater { list-style: none; margin: 0; padding: 0; max-height: min(32dvh, 230px); overflow: auto; }
+  #resultater button { width: 100%; min-height: 44px; padding: 6px; border: 0; border-top: 1px solid #d7e2dd;
+                       color: inherit; background: white; text-align: left; font: inherit; cursor: pointer; }
+  #filtervalg { display: flex; flex-wrap: wrap; gap: 0 12px; }
+  #filtervalg label { display: inline-flex; align-items: center; gap: 4px; min-height: 44px; font-size: .9rem; }
+  #filtervalg input { accent-color: #076c59; }
+  #pladstal { display: block; padding-bottom: 6px; font-size: .8rem; }
+  #forklaring { position: fixed; bottom: 42px; left: 10px; z-index: 1; background: #fffffff4;
+                border-radius: 6px; padding: 8px; line-height: 1.5; font-size: .78rem; color: #173c36; }
+  .prik { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #076c59; }
+  .prik.camping { background: #6945a2; margin-left: 5px; }
+  .maplibregl-ctrl-group button { min-height: 44px; min-width: 44px; }
+  .maplibregl-popup-close-button { width: 44px; height: 44px; font-size: 1.15rem; }
+  .maplibregl-popup-content { box-sizing: border-box; }
+  .plads { color: #173c36; font: .9rem/1.4 system-ui, sans-serif; }
+  .plads h2 { margin: 0 30px 6px 0; font-size: 1.05rem; overflow-wrap: anywhere; }
+  .plads p { margin: 0 0 6px; }
+  .plads a { display: flex; align-items: center; min-height: 44px; color: #075848; }
+  .plads .vej { justify-content: center; border-radius: 6px; background: #075848; color: white;
+                padding: 0 8px; margin-top: 4px; text-decoration: none; }
+</style>
+</head>
+<body>
+<h1 id="titel">Autocamperpladser i Danmark</h1>
+<div id="besked" role="status"></div>
+<div id="kort"></div>
+<div id="indlaeser" role="status">Indlæser data …</div>
+<section id="filtre" aria-label="Filtrér pladser" hidden>
+  <label for="soeg">Søg på pladsnavn eller kommune</label>
+  <input id="soeg" type="search" placeholder="Fx Odense" autocomplete="off">
+  <div id="filtervalg">
+    <label><input id="gratis" type="checkbox"> Gratis pladser</label>
+    <label><input id="toemning" type="checkbox"> Tømmestation</label>
+    <label><input id="stroem" type="checkbox"> Strøm</label>
+  </div>
+  <output id="pladstal" role="status"></output>
+  <ul id="resultater" aria-label="Søgeresultater"></ul>
+</section>
+<div id="forklaring"><span class="prik"></span> Autocamperplads <span class="prik camping"></span> Campingplads<br>GoCamp · data fra 23. november 2026</div>
+<script>
+const kort = new maplibregl.Map({
+  container: 'kort',
+  style: 'https://tiles.openfreemap.org/styles/positron',
+  bounds: [[7.95, 54.5], [15.25, 57.8]], // erstat med områdets [[vest, syd], [øst, nord]]
+  attributionControl: false
+});
+kort.addControl(new maplibregl.AttributionControl({
+  compact: false, // kreditering skal altid være synlig
+  customAttribution: ['<a href="https://www.gocamp.dk/aabne-data/" target="_blank" rel="noopener">GoCamp</a> · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap-bidragydere</a> · <a href="https://opendatacommons.org/licenses/odbl/1-0/" target="_blank" rel="noopener">ODbL 1.0</a>']
+}));
+kort.addControl(new maplibregl.NavigationControl(), 'bottom-right');
+
+function visBesked(tekst) {
+  const el = document.getElementById('besked');
+  el.textContent = tekst;
+  el.style.display = 'block';
+}
+
+// Kildernes navne til fejlbeskeder
+const kildenavne = {};
+function tilføjKilde(id, navn, kilde) {
+  kildenavne[id] = navn;
+  kort.addSource(id, kilde);
+}
+
+kort.on('error', hændelse => {
+  console.error(hændelse.error);
+  const navn = kildenavne[hændelse.sourceId];
+  visBesked(navn ? 'Kunne ikke hente data fra ' + navn + '. Prøv at genindlæse siden.'
+                 : 'Der skete en fejl på kortet. Prøv at genindlæse siden.');
+});
+
+kort.on('load', () => {
+  const adresse = 'https://raw.githubusercontent.com/KennethAndersen-beep/mit-projektunivers/main/data/autocamperpladser-2026-11-23.geojson';
+  const indlæser = document.getElementById('indlaeser');
+  const facilitetsnavne = {
+    bad: 'Bad', drikkevand: 'Drikkevand', 'hund-tilladt': 'Hunde tilladt', stroem: 'Strøm',
+    toilet: 'Toilet', wifi: 'Wi-fi', handicapvenlig: 'Handicapvenlig',
+    'borde-og-baenke': 'Borde og bænke', affald: 'Affald', baalplads: 'Bålplads', braende: 'Brænde'
+  };
+  for (const [klasse, navn] of [
+    ['zoom-in', 'Zoom ind'], ['zoom-out', 'Zoom ud'], ['compass', 'Vend kortet mod nord']
+  ]) {
+    const knap = document.querySelector('.maplibregl-ctrl-' + klasse);
+    if (knap) {
+      knap.title = navn;
+      knap.setAttribute('aria-label', navn);
+    }
+  }
+  kort.getCanvas().setAttribute('aria-label', 'Kort over autocamperpladser i Danmark');
+
+  kort.on('sourcedata', hændelse => {
+    if (hændelse.sourceId === 'pladser' && hændelse.isSourceLoaded) indlæser.hidden = true;
+  });
+  tilføjKilde('pladser', 'GoCamp', { type: 'geojson', data: adresse, generateId: true });
+  kort.addLayer({
+    id: 'pladser', type: 'circle', source: 'pladser',
+    paint: {
+      'circle-radius': ['interpolate', ['linear'], ['zoom'], 5, 4, 9, 6, 13, 8],
+      'circle-color': ['match', ['get', 'kategori'], 'camping', '#6945a2', '#076c59'],
+      'circle-stroke-color': '#fff', 'circle-stroke-width': 1.5
+    }
+  });
+
+  function element(type, tekst) {
+    const felt = document.createElement(type);
+    felt.textContent = tekst;
+    return felt;
+  }
+
+  function tilføjLink(boks, tekst, adresse, klasse) {
+    if (!adresse) return;
+    let url;
+    try {
+      url = new URL(adresse);
+    } catch {
+      return;
+    }
+    if (!['http:', 'https:'].includes(url.protocol)) return;
+    const link = element('a', tekst);
+    link.href = url.href;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    if (klasse) link.className = klasse;
+    boks.append(link);
+  }
+
+  function faciliteterFor(data) {
+    let værdier = data.faciliteter;
+    if (typeof værdier === 'string') {
+      try {
+        værdier = JSON.parse(værdier);
+      } catch {
+        værdier = [];
+      }
+    }
+    const navne = Array.isArray(værdier) ? værdier.map(kode => facilitetsnavne[kode]).filter(Boolean) : [];
+    if (data.toemmestation === true || data.toemmestation === 'true') navne.push('Tømmestation');
+    return navne;
+  }
+
+  let popup;
+  const gratis = document.getElementById('gratis');
+  const tømning = document.getElementById('toemning');
+  const strøm = document.getElementById('stroem');
+  const pladstal = document.getElementById('pladstal');
+  const søgefelt = document.getElementById('soeg');
+  const resultater = document.getElementById('resultater');
+
+  function søgetekst(tekst) {
+    return (tekst || '').trim().toLocaleLowerCase('da-DK').normalize('NFC');
+  }
+
+  kort.getSource('pladser').getData().then(data => {
+    function opdatérFilter() {
+      const ider = [];
+      const ord = søgetekst(søgefelt.value).split(/\s+/).filter(del => del && del !== 'kommune');
+      resultater.replaceChildren();
+      data.features.forEach(({ properties }, id) => {
+        if (gratis.checked && properties.pris !== 'gratis') return;
+        if (tømning.checked && properties.toemmestation !== true) return;
+        if (strøm.checked && !properties.faciliteter?.includes('stroem')) return;
+        const navn = søgetekst(properties.name);
+        const kommune = søgetekst(properties.kommune);
+        if (!ord.every(del => navn.includes(del) || kommune.includes(del))) return;
+        ider.push(id);
+      });
+      const filtrér = ord.length || gratis.checked || tømning.checked || strøm.checked;
+      kort.setFilter('pladser', filtrér ? ['in', ['id'], ['literal', ider]] : null);
+      popup?.remove();
+      pladstal.textContent = ider.length === 0 ? 'Ingen pladser matcher'
+        : ider.length === 1 ? '1 plads' : ider.length + ' pladser';
+      if (!ord.length) return;
+
+      const fund = ider.map(id => data.features[id]).sort((a, b) =>
+        (a.properties.name || '').localeCompare(b.properties.name || '', 'da-DK'));
+      for (const plads of fund) {
+        const { name, kommune, kategori } = plads.properties;
+        const navn = name || (kategori === 'camping' ? 'Campingplads' : 'Autocamperplads');
+        const punkt = document.createElement('li');
+        const knap = element('button', [navn, kommune].filter(Boolean).join(' · '));
+        knap.type = 'button';
+        knap.addEventListener('click', () => {
+          resultater.replaceChildren();
+          søgefelt.blur();
+          kort.jumpTo({ center: plads.geometry.coordinates, zoom: Math.max(11, kort.getZoom()) });
+          visPlads(plads);
+        });
+        punkt.append(knap);
+        resultater.append(punkt);
+      }
+    }
+
+    for (const felt of [gratis, tømning, strøm]) felt.addEventListener('change', opdatérFilter);
+    søgefelt.addEventListener('input', opdatérFilter);
+    søgefelt.addEventListener('keydown', hændelse => {
+      if (hændelse.key === 'Enter') resultater.querySelector('button')?.click();
+      if (hændelse.key === 'Escape') resultater.replaceChildren();
+    });
+    opdatérFilter();
+    document.getElementById('filtre').hidden = false;
+  }).catch(() => visBesked('Pladsfiltrene kunne ikke indlæses. Prøv at genindlæse siden.'));
+
+
+  kort.on('click', hændelse => {
+    const { x, y } = hændelse.point;
+    const pladser = kort.queryRenderedFeatures([[x - 14, y - 14], [x + 14, y + 14]], { layers: ['pladser'] });
+    let plads;
+    let afstand = Infinity;
+    for (const kandidat of pladser) {
+      const pixel = kort.project(kandidat.geometry.coordinates);
+      const forskel = Math.hypot(pixel.x - x, pixel.y - y);
+      if (forskel < afstand) {
+        plads = kandidat;
+        afstand = forskel;
+      }
+    }
+    if (plads) visPlads(plads);
+  });
+
+  function visPlads(plads) {
+    const data = plads.properties;
+    const [længde, bredde] = plads.geometry.coordinates;
+    const type = data.kategori === 'camping' ? 'Campingplads med autocamperadgang' : 'Autocamperplads';
+    const vedHavn = data.havn === true || data.havn === 'true';
+    const pris = { gratis: 'Gratis', betalt: 'Betalt' }[data.pris] || 'Prisstatus ukendt';
+    const boks = document.createElement('div');
+    boks.className = 'plads';
+    boks.append(element('h2', data.name || type),
+                element('p', [type, vedHavn && 'Ved havn', data.kommune].filter(Boolean).join(' · ')),
+                element('p', pris));
+    if (data.saeson) boks.append(element('p', data.saeson));
+    const faciliteter = faciliteterFor(data);
+    boks.append(element('p', faciliteter.length ? faciliteter.join(', ') : 'Faciliteter ikke oplyst'));
+    tilføjLink(boks, 'Pladsens hjemmeside', data.website);
+    tilføjLink(boks, 'Se på GoCamp', data.gocamp_url);
+    const destination = encodeURIComponent(bredde + ',' + længde);
+    tilføjLink(boks, 'Få rutevejledning', 'https://www.google.com/maps/dir/?api=1&destination=' + destination, 'vej');
+    popup?.remove();
+    popup = new maplibregl.Popup({ maxWidth: 'min(300px, 85vw)' })
+      .setLngLat([længde, bredde]).setDOMContent(boks).addTo(kort);
+    const luk = popup.getElement().querySelector('.maplibregl-popup-close-button');
+    luk.title = 'Luk';
+    luk.setAttribute('aria-label', 'Luk');
+  }
+});
+</script>
+</body>
+</html>
