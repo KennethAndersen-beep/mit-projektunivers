@@ -31,6 +31,8 @@
   #filtervalg { display: flex; flex-wrap: wrap; gap: 0 12px; }
   #filtervalg label { display: inline-flex; align-items: center; gap: 4px; min-height: 44px; font-size: .9rem; }
   #filtervalg input { accent-color: #076c59; }
+  #ryd-restaurantfilter { min-height: 44px; margin-bottom: 6px; }
+  .plads button { min-height: 44px; margin-top: 4px; font: inherit; }
   #restaurantstatus { margin: 0 0 6px; font-size: .8rem; }
   #pladstal { display: block; padding-bottom: 6px; font-size: .8rem; }
   #forklaring { position: fixed; bottom: 42px; left: 10px; z-index: 1; background: #fffffff4;
@@ -66,6 +68,7 @@
     <label><input id="restaurantlag" type="checkbox"> <span class="prik restaurant" aria-hidden="true"></span> Vis restauranter</label>
   </div>
   <p id="restaurantstatus" role="status" hidden>Zoom ind for at se restauranter.</p>
+  <button id="ryd-restaurantfilter" type="button" hidden>Vis alle restauranter</button>
   <output id="pladstal" role="status"></output>
   <ul id="resultater" aria-label="Søgeresultater"></ul>
 </section>
@@ -195,14 +198,22 @@ kort.on('load', () => {
   const restaurantstatus = document.getElementById('restaurantstatus');
   const restaurantzoom = 10;
 
+  const rydRestaurantfilter = document.getElementById('ryd-restaurantfilter');
+  let nærvalg;
+
   function visRestaurantstatus() {
-    restaurantstatus.hidden = !restaurantlag.checked || kort.getZoom() >= restaurantzoom;
+    rydRestaurantfilter.hidden = !nærvalg;
+    const zoomInd = restaurantlag.checked && kort.getZoom() < restaurantzoom;
+    restaurantstatus.hidden = !nærvalg && !zoomInd;
+    restaurantstatus.textContent = nærvalg
+      ? nærvalg.status + (zoomInd && nærvalg.antal > 0 ? ' Zoom ind for at se dem.' : '')
+      : 'Zoom ind for at se restauranter.';
   }
 
-  restaurantlag.addEventListener('change', () => {
-    if (restaurantlag.checked && !kort.getSource('restauranter')) {
+  function klargørRestaurantlag() {
+    if (!kort.getSource('restauranter')) {
       tilføjKilde('restauranter', 'OpenStreetMap-restauranter', {
-        type: 'geojson',
+        type: 'geojson', generateId: true,
         data: 'https://raw.githubusercontent.com/KennethAndersen-beep/mit-projektunivers/main/data/restauranter-2026-11-27.geojson'
       });
       kort.addLayer({
@@ -211,12 +222,50 @@ kort.on('load', () => {
                  'circle-stroke-width': 2, 'circle-stroke-color': '#fff' }
       }, 'pladser');
     }
+  }
+
+  function visAlleRestauranter() {
+    nærvalg = undefined;
+    if (restaurantlag.checked) klargørRestaurantlag();
     if (kort.getLayer('restauranter')) {
+      kort.setFilter('restauranter', null);
       kort.setLayoutProperty('restauranter', 'visibility', restaurantlag.checked ? 'visible' : 'none');
     }
     visRestaurantstatus();
     popup?.remove();
-  });
+  }
+
+  restaurantlag.addEventListener('change', visAlleRestauranter);
+  rydRestaurantfilter.addEventListener('click', visAlleRestauranter);
+
+  async function visRestauranterNær(plads) {
+    const valg = { status: 'Indlæser restauranter …' };
+    nærvalg = valg;
+    restaurantlag.checked = true;
+    klargørRestaurantlag();
+    kort.setFilter('restauranter', ['==', ['id'], -1]);
+    kort.setLayoutProperty('restauranter', 'visibility', 'visible');
+    const centrum = maplibregl.LngLat.convert(plads.geometry.coordinates);
+    kort.jumpTo({ center: centrum, zoom: Math.max(11, Math.min(12, kort.getZoom())) });
+    popup?.remove();
+    visRestaurantstatus();
+
+    try {
+      const data = await kort.getSource('restauranter').getData();
+      if (nærvalg !== valg) return;
+      const ider = data.features.flatMap((sted, id) =>
+        centrum.distanceTo(maplibregl.LngLat.convert(sted.geometry.coordinates)) <= 2000 ? [id] : []);
+      kort.setFilter('restauranter', ['in', ['id'], ['literal', ider]]);
+      valg.antal = ider.length;
+      valg.status = ider.length === 0 ? 'Ingen restauranter inden for 2 km.'
+        : ider.length === 1 ? '1 restaurant inden for 2 km.' : ider.length + ' restauranter inden for 2 km.';
+    } catch {
+      if (nærvalg !== valg) return;
+      valg.status = 'Kunne ikke hente restauranter.';
+    }
+    visRestaurantstatus();
+  }
+
   kort.on('zoom', visRestaurantstatus);
 
   const gratis = document.getElementById('gratis');
@@ -350,6 +399,10 @@ kort.on('load', () => {
     boks.append(element('p', faciliteter.length ? faciliteter.join(', ') : 'Faciliteter ikke oplyst'));
     tilføjLink(boks, 'Pladsens hjemmeside', data.website);
     tilføjLink(boks, 'Se på GoCamp', data.gocamp_url);
+    const nærknap = element('button', 'Vis restauranter inden for 2 km');
+    nærknap.type = 'button';
+    nærknap.addEventListener('click', () => visRestauranterNær(plads));
+    boks.append(nærknap);
     visStedPopup(plads.geometry.coordinates, boks);
   }
 
