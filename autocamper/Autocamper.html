@@ -31,11 +31,13 @@
   #filtervalg { display: flex; flex-wrap: wrap; gap: 0 12px; }
   #filtervalg label { display: inline-flex; align-items: center; gap: 4px; min-height: 44px; font-size: .9rem; }
   #filtervalg input { accent-color: #076c59; }
+  #restaurantstatus { margin: 0 0 6px; font-size: .8rem; }
   #pladstal { display: block; padding-bottom: 6px; font-size: .8rem; }
   #forklaring { position: fixed; bottom: 42px; left: 10px; z-index: 1; background: #fffffff4;
                 border-radius: 6px; padding: 8px; line-height: 1.5; font-size: .78rem; color: #173c36; }
   .prik { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #076c59; }
-  .prik.toemningssted { background: #1366b5; margin-right: 4px; }
+  .prik.toemningssted { background: #805331; margin-right: 4px; }
+  .prik.restaurant { background: #a03645; margin-right: 4px; }
   .prik.camping { background: #6945a2; margin-left: 5px; }
   .maplibregl-ctrl-group button { min-height: 44px; min-width: 44px; }
   .maplibregl-popup-close-button { width: 44px; height: 44px; font-size: 1.15rem; }
@@ -61,7 +63,9 @@
     <label><input id="toemning" type="checkbox"> Tømmestation</label>
     <label><input id="stroem" type="checkbox"> Strøm</label>
     <label><input id="toemningslag" type="checkbox"> <span class="prik toemningssted" aria-hidden="true"></span> Vis tømningssteder</label>
+    <label><input id="restaurantlag" type="checkbox"> <span class="prik restaurant" aria-hidden="true"></span> Vis restauranter</label>
   </div>
+  <p id="restaurantstatus" role="status" hidden>Zoom ind for at se restauranter.</p>
   <output id="pladstal" role="status"></output>
   <ul id="resultater" aria-label="Søgeresultater"></ul>
 </section>
@@ -178,7 +182,7 @@ kort.on('load', () => {
       });
       kort.addLayer({
         id: 'toemningssteder', type: 'circle', source: 'toemningssteder',
-        paint: { 'circle-radius': 7, 'circle-color': '#1366b5',
+        paint: { 'circle-radius': 7, 'circle-color': '#805331',
                  'circle-stroke-width': 2, 'circle-stroke-color': '#fff' }
       });
     }
@@ -187,6 +191,34 @@ kort.on('load', () => {
     }
     popup?.remove();
   });
+  const restaurantlag = document.getElementById('restaurantlag');
+  const restaurantstatus = document.getElementById('restaurantstatus');
+  const restaurantzoom = 10;
+
+  function visRestaurantstatus() {
+    restaurantstatus.hidden = !restaurantlag.checked || kort.getZoom() >= restaurantzoom;
+  }
+
+  restaurantlag.addEventListener('change', () => {
+    if (restaurantlag.checked && !kort.getSource('restauranter')) {
+      tilføjKilde('restauranter', 'OpenStreetMap-restauranter', {
+        type: 'geojson',
+        data: 'https://raw.githubusercontent.com/KennethAndersen-beep/mit-projektunivers/main/data/restauranter-2026-11-27.geojson'
+      });
+      kort.addLayer({
+        id: 'restauranter', type: 'circle', source: 'restauranter', minzoom: restaurantzoom,
+        paint: { 'circle-radius': 6, 'circle-color': '#a03645',
+                 'circle-stroke-width': 2, 'circle-stroke-color': '#fff' }
+      }, 'pladser');
+    }
+    if (kort.getLayer('restauranter')) {
+      kort.setLayoutProperty('restauranter', 'visibility', restaurantlag.checked ? 'visible' : 'none');
+    }
+    visRestaurantstatus();
+    popup?.remove();
+  });
+  kort.on('zoom', visRestaurantstatus);
+
   const gratis = document.getElementById('gratis');
   const tømning = document.getElementById('toemning');
   const strøm = document.getElementById('stroem');
@@ -253,6 +285,7 @@ kort.on('load', () => {
     const { x, y } = hændelse.point;
     const lag = ['pladser'];
     if (tømningslag.checked && kort.getLayer('toemningssteder')) lag.unshift('toemningssteder');
+    if (restaurantlag.checked && kort.getZoom() >= restaurantzoom && kort.getLayer('restauranter')) lag.push('restauranter');
     const pladser = kort.queryRenderedFeatures([[x - 14, y - 14], [x + 14, y + 14]], { layers: lag });
     let plads;
     let afstand = Infinity;
@@ -265,6 +298,7 @@ kort.on('load', () => {
       }
     }
     if (plads?.layer.id === 'toemningssteder') visTømningssted(plads);
+    else if (plads?.layer.id === 'restauranter') visRestaurant(plads);
     else if (plads) visPlads(plads);
   });
 
@@ -289,6 +323,15 @@ kort.on('load', () => {
       boks.append(element('p', 'Tømningsmuligheder, betaling og adgang er ikke oplyst.'));
     }
     tilføjLink(boks, 'Se på OpenStreetMap', data.osm_url);
+    visStedPopup(sted.geometry.coordinates, boks);
+  }
+
+  function visRestaurant(sted) {
+    const data = sted.properties;
+    const boks = document.createElement('div');
+    boks.className = 'plads';
+    boks.append(element('h2', data.name || 'Restaurant'));
+    tilføjLink(boks, 'Restaurantens hjemmeside', data.website);
     visStedPopup(sted.geometry.coordinates, boks);
   }
 
