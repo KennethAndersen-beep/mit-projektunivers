@@ -34,6 +34,12 @@
   #ryd-restaurantfilter { min-height: 44px; margin-bottom: 6px; }
   .plads button { min-height: 44px; margin-top: 4px; font: inherit; }
   #restaurantstatus { margin: 0 0 6px; font-size: .8rem; }
+  #naer-mig { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+  #naer-mig select, #naer-mig button { min-height: 44px; font: inherit; }
+  #naer-mig-status { display: block; font-size: .8rem; }
+  #naer-mig-resultater { list-style: none; margin: 0; padding: 0; max-height: 24dvh; overflow: auto; }
+  #naer-mig-resultater button { width: 100%; min-height: 44px; text-align: left; background: white;
+                              color: inherit; border: 0; border-top: 1px solid #d7e2dd; font: inherit; }
   #pladstal { display: block; padding-bottom: 6px; font-size: .8rem; }
   #forklaring { position: fixed; bottom: 42px; left: 10px; z-index: 1; background: #fffffff4;
                 border-radius: 6px; padding: 8px; line-height: 1.5; font-size: .78rem; color: #173c36; }
@@ -71,6 +77,15 @@
   <button id="ryd-restaurantfilter" type="button" hidden>Vis alle restauranter</button>
   <output id="pladstal" role="status"></output>
   <ul id="resultater" aria-label="Søgeresultater"></ul>
+  <div id="naer-mig">
+    <select id="naer-mig-type" aria-label="Hvad vil du finde nær dig?">
+      <option value="pladser">Overnatningspladser</option>
+      <option value="toemningssteder">Tømningssteder</option>
+    </select>
+    <button id="find-naer-mig" type="button">Nær mig</button>
+  </div>
+  <output id="naer-mig-status" role="status"></output>
+  <ul id="naer-mig-resultater" aria-label="Nærmeste steder"></ul>
 </section>
 <div id="forklaring"><span class="prik"></span> Autocamperplads <span class="prik camping"></span> Campingplads<br>GoCamp · data fra 23. november 2026</div>
 <script>
@@ -177,7 +192,7 @@ kort.on('load', () => {
 
   let popup;
   const tømningslag = document.getElementById('toemningslag');
-  tømningslag.addEventListener('change', () => {
+  function opdatérTømningslag() {
     if (tømningslag.checked && !kort.getSource('toemningssteder')) {
       tilføjKilde('toemningssteder', 'OpenStreetMap-tømningssteder', {
         type: 'geojson',
@@ -193,7 +208,8 @@ kort.on('load', () => {
       kort.setLayoutProperty('toemningssteder', 'visibility', tømningslag.checked ? 'visible' : 'none');
     }
     popup?.remove();
-  });
+  }
+  tømningslag.addEventListener('change', opdatérTømningslag);
   const restaurantlag = document.getElementById('restaurantlag');
   const restaurantstatus = document.getElementById('restaurantstatus');
   const restaurantzoom = 10;
@@ -329,6 +345,73 @@ kort.on('load', () => {
     document.getElementById('filtre').hidden = false;
   }).catch(() => visBesked('Pladsfiltrene kunne ikke indlæses. Prøv at genindlæse siden.'));
 
+
+  const findNærMig = document.getElementById('find-naer-mig');
+  const nærMigType = document.getElementById('naer-mig-type');
+  const nærMigStatus = document.getElementById('naer-mig-status');
+  const nærMigResultater = document.getElementById('naer-mig-resultater');
+  let nærMigSøgning = 0;
+
+  nærMigType.addEventListener('change', () => {
+    nærMigSøgning++;
+    nærMigResultater.replaceChildren();
+    nærMigStatus.textContent = '';
+  });
+
+  findNærMig.addEventListener('click', () => {
+    const søgning = ++nærMigSøgning;
+    const type = nærMigType.value;
+    nærMigResultater.replaceChildren();
+    if (!navigator.geolocation) {
+      nærMigStatus.textContent = 'Telefonens position er ikke tilgængelig her. Åbn kortet via projektportalen.';
+      return;
+    }
+    nærMigStatus.textContent = 'Finder din position …';
+    navigator.geolocation.getCurrentPosition(async ({ coords }) => {
+      if (søgning !== nærMigSøgning) return;
+      const centrum = maplibregl.LngLat.convert([coords.longitude, coords.latitude]);
+      const erTømning = type === 'toemningssteder';
+      if (erTømning) {
+        tømningslag.checked = true;
+        opdatérTømningslag();
+      }
+
+      nærMigStatus.textContent = 'Finder de nærmeste steder …';
+      try {
+        const { features } = await kort.getSource(type).getData();
+        if (søgning !== nærMigSøgning) return;
+        const nærmeste = features.map(sted => ({
+          sted,
+          meter: centrum.distanceTo(maplibregl.LngLat.convert(sted.geometry.coordinates))
+        })).sort((a, b) => a.meter - b.meter).slice(0, 5);
+        nærMigStatus.textContent = nærmeste.length ? 'Afstand i fugleflugt' : 'Ingen steder fundet.';
+        for (const { sted, meter } of nærmeste) {
+          const navn = sted.properties.name || (erTømning ? 'Tømningssted' : 'Overnatningsplads');
+          const km = (meter / 1000).toLocaleString('da-DK', { maximumFractionDigits: 1 });
+          const afstand = meter < 1000 ? Math.round(meter) + ' m' : km + ' km';
+          const række = document.createElement('li');
+          const knap = element('button', navn + ' · ' + afstand);
+          knap.type = 'button';
+          knap.addEventListener('click', () => {
+            nærMigResultater.replaceChildren();
+            nærMigStatus.textContent = navn + ' · ' + afstand + ' i fugleflugt';
+            kort.jumpTo({ center: sted.geometry.coordinates, zoom: Math.max(11, kort.getZoom()) });
+            if (erTømning) visTømningssted(sted);
+            else visPlads(sted);
+          });
+          række.append(knap);
+          nærMigResultater.append(række);
+        }
+      } catch {
+        if (søgning === nærMigSøgning) nærMigStatus.textContent = 'Stederne kunne ikke hentes. Prøv igen.';
+      }
+    }, fejl => {
+      if (søgning !== nærMigSøgning) return;
+      nærMigStatus.textContent = fejl.code === 1
+        ? 'Tillad adgang til din position i browseren, og prøv igen.'
+        : 'Din position kunne ikke findes. Prøv igen.';
+    }, { timeout: 10000, maximumAge: 60000 });
+  });
 
   kort.on('click', hændelse => {
     const { x, y } = hændelse.point;
