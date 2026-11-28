@@ -1,0 +1,2975 @@
+{
+  "type": "FeatureCollection",
+  "name": "Tømningssteder i Danmark",
+  "source": "OpenStreetMap via Geofabrik, Denmark extract",
+  "source_timestamp": "2026-11-27T21:21:21Z",
+  "attribution": "© OpenStreetMap contributors",
+  "license": "ODbL 1.0",
+  "license_url": "https://opendatacommons.org/licenses/odbl/1-0/",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.3629154,
+          55.0223265
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/928788407",
+        "name": "Årslev Øst Tømningsstation",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.9915701,
+          54.8549137
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/2735785051",
+        "access": "yes",
+        "grey_water": "no",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.9329677,
+          55.4582272
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/2956007363",
+        "name": "Kongsted Nord",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.3963246,
+          55.5124162
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/2956182091",
+        "name": "Harte Syd Rasteplads",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.3979569,
+          55.5137997
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/2956182092",
+        "name": "Harte Nord Rasteplads Gråvand",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.4936551,
+          57.2035763
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/3079681443",
+        "fee": "yes",
+        "access": "yes",
+        "grey_water": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.2427347,
+          56.6045075
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/3085146639",
+        "fee": "yes",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.4232329,
+          55.0349332
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/3094706566",
+        "fee": "no",
+        "access": "customers",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.7576583,
+          55.3249006
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/4173286535",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.5403756,
+          55.0913415
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/4185771141",
+        "name": "Oasen-2 Tømmestation",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.7066549,
+          55.2624093
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/4322907397",
+        "fee": "no",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.9001716,
+          56.993129
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/4967817915",
+        "name": "Dall tømningsstation",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.125902,
+          55.3506175
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/5134493786",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.8775693,
+          54.9355873
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/5164881058",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.066322,
+          56.1783794
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/5756844742",
+        "name": "Pedersminde Rasteplads tømning for autocampere",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.8834151,
+          55.4066291
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/6558387899",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.5616928,
+          55.640225
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/6561336787",
+        "name": "Skærup Øst Autocamper Tømningsstation",
+        "fee": "no"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.5621693,
+          55.6407224
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/6561336788",
+        "name": "Skærup Øst Campingvogn Tømningsstation",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "no",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.9410418,
+          57.2220962
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/6561394898",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.9414088,
+          57.2221184
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/6561394900",
+        "fee": "no",
+        "access": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.3730824,
+          55.2162736
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/6605973465",
+        "name": "Ustrup Vest Tømningsstation",
+        "fee": "no",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.9375082,
+          57.2225684
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/7418535025",
+        "name": "Vildmosen Vest campingvogn tømningsstation",
+        "fee": "no",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.9378104,
+          57.2227081
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/7418535026",
+        "name": "Vildmosen Vest Autocamper tømningsstation",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.0657759,
+          56.1757611
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/7761168692",
+        "name": "Blankhøj Rasteplads autocampertømning",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.0662667,
+          56.1758705
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/7761222327",
+        "name": "Blankhøj Rasteplads",
+        "fee": "no",
+        "access": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.0661962,
+          56.1786309
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/7762871532",
+        "name": "Pedersminde Rasteplads tømning for campingvogne",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "no",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.3981271,
+          55.5140137
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/8150647332",
+        "name": "Harte Nord Rasteplads WC",
+        "fee": "no",
+        "access": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.1611707,
+          57.1529765
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/8313642013",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.1613229,
+          57.1528023
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/8313642014",
+        "fee": "no",
+        "access": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.1573509,
+          57.1534755
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/8313642338",
+        "fee": "no",
+        "access": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.1572835,
+          57.1537426
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/8313642341",
+        "fee": "no",
+        "access": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.8648735,
+          55.9439123
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/8950524087",
+        "access": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.594731,
+          56.5224628
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/9062902261",
+        "access": "customers",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.766851,
+          56.1490926
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/9084846298",
+        "name": "Kalbygård Skov Nord Tømningsstation",
+        "fee": "no"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.7607208,
+          56.1483958
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/9092920920",
+        "name": "Kalbygård Skov Syd Tømningsstation",
+        "fee": "no"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.0802742,
+          55.5653985
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/9250354043",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.0782501,
+          55.5690362
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/9250354048",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "no",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.3743879,
+          55.215902
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/9868839421",
+        "name": "Ustrup Rasteplads Øst",
+        "fee": "no",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.8401886,
+          55.2975329
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/9880248920",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.7435739,
+          56.8418006
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/9883179765",
+        "name": "Himmerland Øst tømningsstation",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6156974,
+          56.5513296
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/9909108022",
+        "fee": "no"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.6148838,
+          56.0414852
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/9952396267",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "no",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.166791,
+          54.9953935
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/9956749893",
+        "fee": "yes",
+        "access": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.2291863,
+          55.5606522
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/9993598992",
+        "name": "Karlslunde Vest",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "no",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.5478936,
+          55.1629891
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/10033796046",
+        "fee": "yes",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.234511,
+          55.0971095
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/10759205448",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.1088005,
+          55.3483737
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/10764000468",
+        "name": "Kørsør Syd Toilet tømning",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.2309241,
+          55.5607142
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/10800172184",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.2315276,
+          55.5607929
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/10800172185",
+        "name": "Karlslunde Øst",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "no",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.6059607,
+          55.4551072
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/10800197643",
+        "name": "Tuelsø Nord Autocamper Tømningsstation",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.6060961,
+          55.4552345
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/10800197644",
+        "name": "Tuelsø Nord",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "no",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.5975405,
+          55.4553311
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/10800197645",
+        "name": "Tuelsø Syd Campingvogn Tømningsstation",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "no",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.5976539,
+          55.4554688
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/10800197646",
+        "name": "Tuelsø Syd Autocamper Tømningsstation",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "no"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.8425003,
+          55.9627964
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/10988940475",
+        "fee": "no",
+        "access": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.9522136,
+          57.2748153
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/10990039965",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.6335909,
+          56.9887009
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11028192857",
+        "name": "Nibe Lystbådehavn",
+        "fee": "no",
+        "access": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7115076,
+          54.9402804
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11028619875",
+        "name": "Rudkøbing Lystbådehavn",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.1894801,
+          55.3934887
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11033950016",
+        "name": "Kildebjerg Syd Sanitary toilet dump station",
+        "access": "yes",
+        "grey_water": "no",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.7382011,
+          57.38576
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11038420035",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.0037706,
+          56.0399698
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11038639553",
+        "name": "Søby Øst Campertømning",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.0014874,
+          56.0379133
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11038639554",
+        "name": "Søby Vest Campertømning",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.578694,
+          55.0569543
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11038744434",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "no"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.7427015,
+          55.1540149
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11039735744",
+        "name": "Marsk Camp Tømmestation",
+        "fee": "yes",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.070838,
+          56.6837925
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11039953778",
+        "name": "Kongsdal Lystbådehavn Autocamperplads",
+        "access": "customers",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.7947386,
+          54.8995265
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11039988503",
+        "fee": "yes",
+        "access": "yes",
+        "grey_water": "no",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.5333453,
+          57.3322052
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11043004393",
+        "name": "Sæby Havn Toilettømning",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.1378263,
+          55.7304262
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11047242018",
+        "fee": "no",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.1380407,
+          55.5457955
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11051822319",
+        "fee": "no",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.2824909,
+          55.2571993
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11053432048",
+        "access": "customers",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.356878,
+          54.9140692
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11057671230",
+        "fee": "no",
+        "access": "customers",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.494246,
+          56.2778751
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11069667574",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.3197027,
+          56.5311931
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11070269360",
+        "fee": "no",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.1410509,
+          55.9620741
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11076817556",
+        "fee": "no",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6370276,
+          56.8849554
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11078472472",
+        "access": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.7405352,
+          56.8425408
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11087801886",
+        "name": "Himmerland Vest tømningsstation",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.1356482,
+          55.5464663
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11101879851",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.88359,
+          55.2690384
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11104282646",
+        "fee": "yes",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.0018474,
+          56.4488667
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11106085815",
+        "name": "Gudenå Ø",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.9991887,
+          56.449911
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11106085821",
+        "name": "Gudenå V",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.5949094,
+          56.522881
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11109410355",
+        "access": "customers",
+        "grey_water": "no",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.6756188,
+          54.7517011
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11111810295",
+        "access": "yes",
+        "grey_water": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.1220772,
+          55.9971475
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11150009684",
+        "fee": "no",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.5893124,
+          56.494407
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11172130318",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.2951569,
+          55.9240935
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11194753214",
+        "access": "customers",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.3749481,
+          55.2542357
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11207358216",
+        "fee": "yes",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.7285122,
+          55.0788463
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11237582415",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.7287663,
+          55.0786425
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11237582434",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.1883447,
+          55.3952349
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11239647506",
+        "name": "Kildebjerg Nord Tømningsstation",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.9478235,
+          55.0608554
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11495737973",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.9851398,
+          54.9496204
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11512569258",
+        "fee": "no",
+        "access": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.9569197,
+          55.1684262
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11512601310",
+        "name": "Tappernøje Vest Toilettømning",
+        "fee": "no",
+        "access": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.9584076,
+          55.1664484
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11512601312",
+        "name": "Tappernøje Øst",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.9571953,
+          55.1683175
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11512662078",
+        "name": "Tappernøje Vest",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.847884,
+          55.5189206
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11691009051",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.8478029,
+          55.5187175
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11691009053",
+        "name": "Bjøvlund Nord",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.8520555,
+          55.5169108
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11691009055",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.8520166,
+          55.5170631
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11691009058",
+        "name": "Bjøvlund Syd",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.4264787,
+          55.4753701
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11691039680",
+        "name": "Hylkedal Øst",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.8452695,
+          55.4877591
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11691439810",
+        "name": "Lillebælt Nord",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.3965781,
+          55.8358223
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11691600074",
+        "name": "Hærvejen Syd",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.3971542,
+          55.8367464
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11691600076",
+        "name": "Hærvejen Nord",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.299391,
+          56.134404
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11691609799",
+        "name": "Rønkilde Nord Tømning",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.3008655,
+          56.1332269
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11691609801",
+        "name": "Rønkilde Syd Tømning",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.0012252,
+          56.0378608
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11694564201",
+        "name": "Søby Vest Campingvognstømning",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "no",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.71914,
+          56.3665597
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11694583619",
+        "name": "Mejrup camper tømningsstation",
+        "fee": "no",
+        "access": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.8659118,
+          55.9782706
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11694666550",
+        "name": "Ejer Bavnehøj Vest tømningsstation",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.8697332,
+          55.9773077
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11694719602",
+        "name": "Ejer Bavnehøj Øst tømningsstation",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.3962083,
+          55.5121948
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11694756302",
+        "name": "Harte Syd Rasteplads Campingvogn Tømningsstation",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "no",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.3325169,
+          54.8318551
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11694773884",
+        "name": "Frøslev Vest Tømningsstation"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.330174,
+          54.8265132
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11694773886",
+        "name": "Frøslev Øst Tømningsstation",
+        "fee": "no",
+        "access": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.5588604,
+          55.6418078
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11694836847",
+        "fee": "no",
+        "access": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.0355987,
+          55.3253519
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11694893076",
+        "name": "Piberhus Vest Tømningsstation",
+        "fee": "no",
+        "access": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.7990856,
+          55.271686
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11695058389",
+        "name": "Circle K Allinge",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.8799518,
+          55.4778479
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11695085352",
+        "name": "Lillebælt Syd",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.8209786,
+          54.8407141
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11695136712",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "no",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.9409667,
+          57.0064807
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11695629436"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.2166636,
+          56.1391317
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11816635098",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.2333126,
+          56.1095996
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11971459974",
+        "fee": "no",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.2307539,
+          56.1108042
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/11971481627"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.5407469,
+          55.0936523
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/12055531979",
+        "fee": "no",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.5406707,
+          55.0936539
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/12055532045",
+        "fee": "no",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.515825,
+          55.9409827
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/12081366102",
+        "fee": "no",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.1450811,
+          55.1525736
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/12082559032",
+        "fee": "no"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.7576334,
+          55.3249141
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/12093057039",
+        "fee": "no",
+        "access": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.985836,
+          57.5765503
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/12105804879",
+        "fee": "no",
+        "access": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.9173202,
+          55.0043937
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/12134022249",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "no",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.7526869,
+          55.2310716
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/12140840585",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6444554,
+          56.3496709
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/12149328071",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.9326227,
+          57.5517359
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/12157431986"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.2873433,
+          56.2105351
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/12175118101"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.1497088,
+          56.3195535
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/12177957188",
+        "fee": "no",
+        "access": "private"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.5855986,
+          57.2212494
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/12181703957",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.4539036,
+          57.6527603
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/12185730695",
+        "fee": "no",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.07649,
+          57.0995991
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/12189918411",
+        "grey_water": "yes",
+        "chemical_toilet": "no"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.4727787,
+          55.2402507
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/12198613530"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.2298244,
+          55.5610418
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/12380818373",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.2586931,
+          54.9410365
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/12581835141"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.5477064,
+          55.4484859
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/12883466751",
+        "fee": "no",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.5475361,
+          55.4485026
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/12883466752",
+        "fee": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6781879,
+          55.3385907
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/12896942946",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.7747505,
+          57.3890123
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/12912119206"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.7255101,
+          57.3854242
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/12921427452"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.7038777,
+          55.494394
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/12948829543",
+        "fee": "no"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.4591552,
+          57.6393586
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/13017654535",
+        "fee": "no",
+        "access": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.1740001,
+          57.1339644
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/13073787037",
+        "fee": "no"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7127527,
+          54.9422274
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/13086290953"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.1347427,
+          55.7312818
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/13089561499",
+        "fee": "no"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.1349129,
+          55.7311516
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/13089561500",
+        "fee": "no"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.6247749,
+          55.6089921
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/13098213300",
+        "fee": "no",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.7662186,
+          55.3416963
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/13112717449",
+        "fee": "no",
+        "access": "customers",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.1338404,
+          56.0018965
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/13114674817",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.2616147,
+          56.7800523
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/13114744356",
+        "fee": "no",
+        "access": "customers",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.2620506,
+          56.7784358
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/13114782003",
+        "fee": "no",
+        "access": "customers",
+        "grey_water": "yes",
+        "chemical_toilet": "no"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.9000016,
+          56.9917737
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/13115256970",
+        "fee": "no",
+        "access": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.4510629,
+          55.5369497
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/13119130683"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6352511,
+          56.6519995
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/13142328631"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.2408944,
+          56.0866418
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/13169141201",
+        "grey_water": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.2409758,
+          56.0866287
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/13169141202",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.5594212,
+          55.6425022
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/13905192162",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.7951171,
+          54.8989975
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/13985698028",
+        "fee": "no",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.9220507,
+          56.9746182
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/14002517817",
+        "fee": "no"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.1054102,
+          55.1761946
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/14022993774",
+        "fee": "no",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.1045806,
+          55.1744794
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/14027548102",
+        "fee": "no"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.4232227,
+          55.0349008
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/14028977552",
+        "fee": "no",
+        "access": "yes",
+        "grey_water": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.1444992,
+          55.6662162
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/14045319633",
+        "fee": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.0750683,
+          55.6757629
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/14046862279",
+        "fee": "no",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.1458627,
+          55.6699908
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/14049187969",
+        "fee": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.9524081,
+          57.2748188
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/14063470126"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.1528606,
+          54.8829539
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/14077575183",
+        "fee": "no"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.2833884,
+          54.9810588
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/14091692565"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.7117642,
+          55.2487074
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/14098774541",
+        "fee": "no"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.712459,
+          55.2491886
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/14098774542",
+        "fee": "no"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.8341986,
+          55.6251042
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/14122369489",
+        "fee": "no",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.873113,
+          55.8575399
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/14128033902",
+        "fee": "no"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.9233429,
+          56.4050943
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/14132978237",
+        "fee": "no"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.5362329,
+          57.4628427
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/14136850585",
+        "fee": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.614458,
+          57.7310183
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/14141553935",
+        "fee": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.6160894,
+          57.730698
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/14142594423",
+        "fee": "no",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.1754041,
+          57.1339766
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/14148055640",
+        "fee": "no",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.865096,
+          56.7923475
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/14153534019",
+        "fee": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.3717024,
+          55.9538921
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/14166295161",
+        "fee": "no",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.5011872,
+          55.4879129
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/14169534976",
+        "fee": "no",
+        "access": "customers",
+        "grey_water": "no",
+        "chemical_toilet": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.500974,
+          55.4879253
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/14172787893",
+        "fee": "no",
+        "grey_water": "yes",
+        "chemical_toilet": "no"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.0437173,
+          54.8919786
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/14193466684",
+        "fee": "no",
+        "grey_water": "no"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.4229441,
+          55.0385459
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/node/14213964732"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.1358439,
+          55.5469607
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/way/1196401007",
+        "access": "customers"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.3718371,
+          55.9539562
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/way/1236402969",
+        "fee": "no",
+        "grey_water": "yes"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.6712704,
+          55.9149629
+        ]
+      },
+      "properties": {
+        "osm_url": "https://www.openstreetmap.org/way/1442166219",
+        "fee": "no"
+      }
+    }
+  ]
+}

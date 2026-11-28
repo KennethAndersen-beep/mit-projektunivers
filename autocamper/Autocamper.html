@@ -35,6 +35,7 @@
   #forklaring { position: fixed; bottom: 42px; left: 10px; z-index: 1; background: #fffffff4;
                 border-radius: 6px; padding: 8px; line-height: 1.5; font-size: .78rem; color: #173c36; }
   .prik { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #076c59; }
+  .prik.toemningssted { background: #1366b5; margin-right: 4px; }
   .prik.camping { background: #6945a2; margin-left: 5px; }
   .maplibregl-ctrl-group button { min-height: 44px; min-width: 44px; }
   .maplibregl-popup-close-button { width: 44px; height: 44px; font-size: 1.15rem; }
@@ -59,6 +60,7 @@
     <label><input id="gratis" type="checkbox"> Gratis pladser</label>
     <label><input id="toemning" type="checkbox"> Tømmestation</label>
     <label><input id="stroem" type="checkbox"> Strøm</label>
+    <label><input id="toemningslag" type="checkbox"> <span class="prik toemningssted" aria-hidden="true"></span> Vis tømningssteder</label>
   </div>
   <output id="pladstal" role="status"></output>
   <ul id="resultater" aria-label="Søgeresultater"></ul>
@@ -167,6 +169,24 @@ kort.on('load', () => {
   }
 
   let popup;
+  const tømningslag = document.getElementById('toemningslag');
+  tømningslag.addEventListener('change', () => {
+    if (tømningslag.checked && !kort.getSource('toemningssteder')) {
+      tilføjKilde('toemningssteder', 'OpenStreetMap-tømningssteder', {
+        type: 'geojson',
+        data: 'https://raw.githubusercontent.com/KennethAndersen-beep/mit-projektunivers/main/data/toemningssteder-2026-11-27.geojson'
+      });
+      kort.addLayer({
+        id: 'toemningssteder', type: 'circle', source: 'toemningssteder',
+        paint: { 'circle-radius': 7, 'circle-color': '#1366b5',
+                 'circle-stroke-width': 2, 'circle-stroke-color': '#fff' }
+      });
+    }
+    if (kort.getLayer('toemningssteder')) {
+      kort.setLayoutProperty('toemningssteder', 'visibility', tømningslag.checked ? 'visible' : 'none');
+    }
+    popup?.remove();
+  });
   const gratis = document.getElementById('gratis');
   const tømning = document.getElementById('toemning');
   const strøm = document.getElementById('stroem');
@@ -231,23 +251,49 @@ kort.on('load', () => {
 
   kort.on('click', hændelse => {
     const { x, y } = hændelse.point;
-    const pladser = kort.queryRenderedFeatures([[x - 14, y - 14], [x + 14, y + 14]], { layers: ['pladser'] });
+    const lag = ['pladser'];
+    if (tømningslag.checked && kort.getLayer('toemningssteder')) lag.unshift('toemningssteder');
+    const pladser = kort.queryRenderedFeatures([[x - 14, y - 14], [x + 14, y + 14]], { layers: lag });
     let plads;
     let afstand = Infinity;
     for (const kandidat of pladser) {
       const pixel = kort.project(kandidat.geometry.coordinates);
       const forskel = Math.hypot(pixel.x - x, pixel.y - y);
-      if (forskel < afstand) {
+      if (forskel < afstand || (forskel === afstand && kandidat.layer.id === 'toemningssteder')) {
         plads = kandidat;
         afstand = forskel;
       }
     }
-    if (plads) visPlads(plads);
+    if (plads?.layer.id === 'toemningssteder') visTømningssted(plads);
+    else if (plads) visPlads(plads);
   });
+
+  function visTømningssted(sted) {
+    const data = sted.properties;
+    const boks = document.createElement('div');
+    boks.className = 'plads';
+    boks.append(element('h2', data.name || 'Tømningssted'));
+    const betaling = { yes: 'Betaling', no: 'Gratis' };
+    const adgang = { yes: 'Offentlig', customers: 'Kun for kunder', private: 'Privat', permissive: 'Tilladt', no: 'Ingen adgang' };
+    const svar = { yes: 'Ja', no: 'Nej' };
+    const oplysninger = [
+      ['Gråvand', svar[data.grey_water]],
+      ['Toiletkassette', svar[data.chemical_toilet]],
+      ['Pris', betaling[data.fee]],
+      ['Adgang', adgang[data.access]]
+    ];
+    for (const [titel, værdi] of oplysninger) {
+      if (værdi) boks.append(element('p', titel + ' · ' + værdi));
+    }
+    if (oplysninger.every(([, værdi]) => !værdi)) {
+      boks.append(element('p', 'Tømningsmuligheder, betaling og adgang er ikke oplyst.'));
+    }
+    tilføjLink(boks, 'Se på OpenStreetMap', data.osm_url);
+    visStedPopup(sted.geometry.coordinates, boks);
+  }
 
   function visPlads(plads) {
     const data = plads.properties;
-    const [længde, bredde] = plads.geometry.coordinates;
     const type = data.kategori === 'camping' ? 'Campingplads med autocamperadgang' : 'Autocamperplads';
     const vedHavn = data.havn === true || data.havn === 'true';
     const pris = { gratis: 'Gratis', betalt: 'Betalt' }[data.pris] || 'Prisstatus ukendt';
@@ -261,6 +307,11 @@ kort.on('load', () => {
     boks.append(element('p', faciliteter.length ? faciliteter.join(', ') : 'Faciliteter ikke oplyst'));
     tilføjLink(boks, 'Pladsens hjemmeside', data.website);
     tilføjLink(boks, 'Se på GoCamp', data.gocamp_url);
+    visStedPopup(plads.geometry.coordinates, boks);
+  }
+
+  function visStedPopup(koordinater, boks) {
+    const [længde, bredde] = koordinater;
     const destination = encodeURIComponent(bredde + ',' + længde);
     tilføjLink(boks, 'Få rutevejledning', 'https://www.google.com/maps/dir/?api=1&destination=' + destination, 'vej');
     popup?.remove();
